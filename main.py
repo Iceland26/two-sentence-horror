@@ -18,6 +18,10 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(STORY)
+    # Read back what was written and confirm it is byte-identical to
+    # the story, so a failed or partial write can never go unnoticed.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        assert f.read() == STORY
     print(STORY)
 
 
